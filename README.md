@@ -2,6 +2,29 @@
 
 This C++ numerical model was developed to show the performance of Direct Numerical Simulation (DNS) and Large Eddy Simulation (LES) for one-dimensional flows. It solves the viscous Burgers' equation, a standard 1D model problem for turbulence, using second-order finite differences and adaptive time stepping. The solver runs either as a fully resolved DNS or as an LES with a Smagorinsky subgrid-scale model, and varying the diffusion coefficient covers both laminar and turbulent-like regimes. This work is part of my broader research on the numerical study of turbulent flows.
 
+## How to run
+
+**Requirements:** a C++17 compiler (GCC, Clang or MSVC) and CMake 3.16 or newer.
+
+**Build** (from the repository folder):
+```bash
+cmake -B build
+cmake --build build
+```
+
+**Run** a DNS or LES case:
+```bash
+./build/burgers --config cases/dns.cfg
+./build/burgers --config cases/les.cfg
+```
+
+Any setting can be changed on the command line, for example `--nu 0.005` or `--n-points 801`. Run `./build/burgers --help` to see all options.
+
+**Output:** each run writes its results to the folder set by `output_dir` in the config file:
+- `u_0000.csv`, `u_0001.csv`, …: velocity profiles over time
+- `time_series.csv`: kinetic energy and time step
+- `run_config.cfg`: the exact settings used, so the run can be repeated
+
 ## Code structure
 
 The solver is written in modern C++17 and organised as a reusable library plus a small command-line application. It uses object-oriented design with runtime polymorphism (an abstract SGS-model interface and a factory), RAII and smart pointers (`std::unique_ptr`) for memory safety, `std::vector` instead of raw arrays, `enum class`, `const`-correctness, exception-based error handling, and standard-library features such as `std::filesystem`, `std::chrono` and `std::to_chars`. It builds with CMake and compiles cleanly under strict warnings (`-Wall -Wextra -Wpedantic -Wconversion`) with GCC and Clang. It has also been run under AddressSanitizer and UndefinedBehaviorSanitizer.
