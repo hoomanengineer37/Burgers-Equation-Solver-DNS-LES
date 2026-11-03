@@ -2,6 +2,7 @@
 ![C++17](https://img.shields.io/badge/C%2B%2B-17-00599C?logo=c%2B%2B&logoColor=white)
 ![CMake](https://img.shields.io/badge/build-CMake-064F8C?logo=cmake&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
+
 This C++ numerical model was developed to show the performance of Direct Numerical Simulation (DNS) and Large Eddy Simulation (LES) for one-dimensional flows. It solves the viscous Burgers' equation, a standard 1D model problem for turbulence, using second-order finite differences and adaptive time stepping. The solver runs either as a fully resolved DNS or as an LES with a Smagorinsky subgrid-scale model, and varying the diffusion coefficient covers both laminar and turbulent-like regimes. This work is part of my broader research on the numerical study of turbulent flows.
 
 ## How to run
